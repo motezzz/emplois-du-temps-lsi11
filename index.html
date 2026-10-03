@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emplois du Temps LSI11 - Digital Purple</title>
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #090712 0%, #160b2e 50%, #05030a 100%);
+            --card-bg: rgba(22, 14, 40, 0.75);
+            --border-glow: rgba(168, 85, 247, 0.25);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent-purple: #c084fc;
+            --accent-pink: #f472b6;
+            --header-bg: rgba(35, 20, 65, 0.85);
+            --cell-hover: rgba(168, 85, 247, 0.12);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-main);
+            min-height: 100vh;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            background: linear-gradient(to right, #e879f9, #c084fc, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-shadow: 0 0 30px rgba(192, 132, 252, 0.25);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 45px;
+            font-size: 1.05rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .schedule-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px var(--border-glow);
+            margin-bottom: 40px;
+            overflow: hidden;
+            border: 1px solid rgba(168, 85, 247, 0.18);
+        }
+
+        h2 {
+            background: linear-gradient(90deg, rgba(88, 28, 135, 0.7), rgba(49, 15, 87, 0.5));
+            color: var(--text-main);
+            padding: 18px 24px;
+            margin: 0;
+            font-size: 1.25rem;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        h2::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-purple);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--accent-purple);
+        }
+
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th, td {
+            padding: 15px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: var(--header-bg);
+            font-weight: 700;
+            color: var(--accent-purple);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+
+        td:first-child {
+            background-color: rgba(15, 8, 30, 0.6);
+            font-weight: 600;
+            color: var(--accent-pink);
+            text-align: center;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+        }
+
+        td small {
+            display: block;
+            color: var(--text-muted);
+            margin-top: 3px;
+            font-size: 0.8rem;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:hover td {
+            background-color: var(--cell-hover);
+            transition: background-color 0.2s ease;
+        }
+
+        .empty-slot {
+            color: rgba(255, 255, 255, 0.15);
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background: #090712;
+                color: white;
+            }
+            .schedule-card {
+                box-shadow: none;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>CYBER_SCHEDULE // LSI11</h1>
+    <p class="subtitle">Matrice d'organisation pédagogique — Cours / TD / TP</p>
+
+    <div class="schedule-card">
+        <h2>TABLEAU 1 : TD1 — TP1 + Cours et TD associés</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:15 - 09:45</td>
+                        <td>Algo 1 (TD)<small>Salle 17 (Ellouze)</small></td>
+                        <td>Logique formelle<small>Salle 31</small></td>
+                        <td>Atelier de prog 1 (TP1)<small>Salle B10 (Boujelben)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algèbre 1 (TD)<small>Salle 53 (Ben Amor)</small></td>
+                        <td>Technologies multimédias<small>Salle A2 (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>09:55 - 11:25</td>
+                        <td class="empty-slot">—</td>
+                        <td>Logique formelle (TD)<small>Salle 22 (Hadj Kacem)</small></td>
+                        <td>Atelier de prog 1 (TP1)<small>Salle B10 (Boujelben)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algèbre 1<small>Salle 63</small></td>
+                        <td>Digital 1 (TP1)<small>Salle B (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>11:35 - 13:05</td>
+                        <td class="empty-slot">—</td>
+                        <td>Atelier de prog 1<small>Salle 32 (Jaoua)</small></td>
+                        <td>Sys. d'exploitation 1 (TP1)<small>Salle A (Bakiouti)</small></td>
+                        <td>Multimédia (TP2)<small>Salle 6</small></td>
+                        <td>Sys. d'exploitation 1 (TP)<small>Salle B (Baklouti / Ben Jemaa)</small></td>
+                        <td>Analyse 1 (TD)<small>Salle 7 (Ben Amor)</small></td>
+                    </tr>
+                    <tr>
+                        <td>13:35 - 15:05</td>
+                        <td>Analyse 1<small>Salle 31</small></td>
+                        <td>Sys. logiques (TD)<small>Salle 41 (Gabsi)</small></td>
+                        <td>Sys. logiques & Arch. (TP1)<small>Salle CC1 (Barhoumi)</small></td>
+                        <td>Anglais / Study Skills<small>Salle 38 (Gabsi)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Digital 1<small>Salle B (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>15:10 - 16:40</td>
+                        <td>Algèbre 1<small>Salle 12</small></td>
+                        <td>Sys. logiques<small>Salle 12</small></td>
+                        <td>Atelier de prog 1 (TP1)<small>Salle C</small></td>
+                        <td>Sys. logiques<small>Salle 38 (Gabsi)</small></td>
+                        <td>Français 1<small>Salle 24 (Mabrouk)</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>16:45 - 18:15</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td>Analyse 1<small>Salle 53</small></td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="schedule-card">
+        <h2>TABLEAU 2 : TD1 — TP2 + Cours et TD associés</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:15 - 09:45</td>
+                        <td>Algo 1 (TD)<small>Salle 17 (Ellouze)</small></td>
+                        <td>Logique formelle<small>Salle 31</small></td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle 6 (Boujelben)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algèbre 1 (TD)<small>Salle 53 (Ben Amor)</small></td>
+                        <td>Technologies multimédias<small>Salle A2 (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>09:55 - 11:25</td>
+                        <td class="empty-slot">—</td>
+                        <td>Logique formelle (TD)<small>Salle 22 (Hadj Kacem)</small></td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle 2 (Boujelben)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algèbre 1<small>Salle 63</small></td>
+                        <td>Digital 1 (TP1)<small>Salle B (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>11:35 - 13:05</td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle B</small></td>
+                        <td>Atelier de prog 1<small>Salle 32 (Jaoua)</small></td>
+                        <td>Sys. d'exploitation 1 (TP2)<small>Jemaa Maima</small></td>
+                        <td>Multimédia (TP2)<small>Salle 6 (Sourour)</small></td>
+                        <td>Sys. d'exp 1 (TP)<small>Salle B (Baklouti / Ben Jemaa)</small></td>
+                        <td>Analyse 1 (TD)<small>Salle 7 (Ben Amor)</small></td>
+                    </tr>
+                    <tr>
+                        <td>13:35 - 15:05</td>
+                        <td>Analyse 1<small>Salle 31</small></td>
+                        <td>Sys. logiques (TD)<small>Salle 41 (Gabsi)</small></td>
+                        <td>Sys. logiques & Arch.<small>Salle CC1</small></td>
+                        <td>Anglais / Study Skills<small>Salle 38 (Gabsi)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Digital 1<small>Salle B (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>15:10 - 16:40</td>
+                        <td>Algèbre 1<small>Salle 12</small></td>
+                        <td>Sys. logiques<small>Salle 12</small></td>
+                        <td>Atelier de prog 1<small>Salle C</small></td>
+                        <td>Sys. logiques & Arch. (TP2)<small>Salle 3 (Barhoumi)</small></td>
+                        <td>Français 1<small>Salle 24 (Mabrouk)</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>16:45 - 18:15</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td>Analyse 1<small>Salle 53</small></td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="schedule-card">
+        <h2>TABLEAU 3 : TD2 — TP1 + Cours et TD associés</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:15 - 09:45</td>
+                        <td>Algo 1 (TD)<small>Salle 65 (Gargouri)</small></td>
+                        <td>Logique formelle<small>Salle 31 (Hadj Kacem)</small></td>
+                        <td>Sys. logiques & Arch. (TP1)<small>Salle CC1 (Barhoumi)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Sys. d'exploitation 1 (TP1)<small>Salle CC1 (Ellouze)</small></td>
+                        <td>Technologies multimédias<small>Salle A2 (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>09:55 - 11:25</td>
+                        <td>Algo 1 (TD)<small>Salle 65</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Atelier de prog 1 (TP1)<small>Salle C (Jaoua)</small></td>
+                        <td>Logique formelle (TD)<small>Salle 63 (Sahlioun)</small></td>
+                        <td>Algèbre 1 (TD)<small>Salle 63 (Ben Amor)</small></td>
+                        <td>Digital 1<small>Salle B</small></td>
+                    </tr>
+                    <tr>
+                        <td>11:35 - 13:05</td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle B (Ketata)</small></td>
+                        <td>Atelier de prog 1<small>Salle 36 (Jaoua)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Technologies multimédias (TP2)<small>Salle D (Ben Hmida)</small></td>
+                        <td>Sys. d'exploitation 1 (TP2)<small>Salle CC1 (Fakhfakh)</small></td>
+                        <td>Digital 1<small>Salle B</small></td>
+                    </tr>
+                    <tr>
+                        <td>13:35 - 15:05</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td>Analyse 1 (TD)<small>Salle 53 (Ben Amor)</small></td>
+                        <td>Study Skills<br><small>Salle 38 (Gabsi)</small></td>
+                        <td>Technologies multimédias (TP1)<small>Salle 11 (Ben Hmida)</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>15:10 - 16:40</td>
+                        <td class="empty-slot">—</td>
+                        <td>Sys. logiques & Arch.<small>Salle 12 (Gabsi)</small></td>
+                        <td>Sys. logiques & Arch. (TD)<small>Salle 31 (Sof Medhi)</small></td>
+                        <td>Sys. logiques & Arch.<small>Salle 38 (Gabsi)</small></td>
+                        <td>Français 1<small>Salle 24 (Mabrouk)</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>16:45 - 18:15</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="schedule-card">
+        <h2>TABLEAU 4 : TD2 — TP2 + Cours et TD associés</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:15 - 09:45</td>
+                        <td>Algo 1 (TD)<small>Salle 65 (Gargouri)</small></td>
+                        <td>Logique formelle<small>Salle 31 (Hadj Kacem)</small></td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle B (Ketata)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Sys. logiques & Arch. (TP2)<small>Salle 3 (Barhoumi)</small></td>
+                        <td>Technologies multimédias<small>Salle A2 (Ben Abdallah)</small></td>
+                    </tr>
+                    <tr>
+                        <td>09:55 - 11:25</td>
+                        <td>Algo 1 (TD)<small>Salle 65</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle B (Ketata)</small></td>
+                        <td>Logique formelle (TD)<small>Salle 63 (Sahlioun)</small></td>
+                        <td>Algèbre 1 (TD)<small>Salle 63 (Ben Amor)</small></td>
+                        <td>Digital 1<small>Salle B</small></td>
+                    </tr>
+                    <tr>
+                        <td>11:35 - 13:05</td>
+                        <td>Atelier de prog 1 (TP2)<small>Salle B (Ketata)</small></td>
+                        <td>Atelier de prog 1<small>Salle 36 (Jaoua)</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Technologies multimédias (TP2)<small>Salle D (Ben Hmida)</small></td>
+                        <td>Sys. d'exploitation 1 (TP2)<small>Salle C (Loulou)</small></td>
+                        <td>Digital 1<small>Salle B</small></td>
+                    </tr>
+                    <tr>
+                        <td>13:35 - 15:05</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td>Analyse 1 (TD)<small>Salle 53 (Ben Amor)</small></td>
+                        <td>Study Skills<br><small>Salle 38 (Gabsi)</small></td>
+                        <td>Sys. d'exploitation 1 (TP2)<small>Salle C (Loulou)</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>15:10 - 16:40</td>
+                        <td class="empty-slot">—</td>
+                        <td>Sys. logiques & Arch.<small>Salle 12 (Gabsi)</small></td>
+                        <td>Sys. logiques & Arch. (TD)<small>Salle 31 (Sof Medhi)</small></td>
+                        <td>Sys. logiques & Arch.<small>Salle 38 (Gabsi)</small></td>
+                        <td>Français 1<small>Salle 24 (Mabrouk)</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>16:45 - 18:15</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="schedule-card">
+        <h2>TABLEAU 5 : TD3 — TP1 + Cours et TD associés</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:15 - 09:45</td>
+                        <td>Algo 1 (CR)<small>Salle MQ</small></td>
+                        <td>Logique formelle (TD)<small>Salle 22</small></td>
+                        <td>Algèbre 1 (TD)<small>Salle 13</small></td>
+                        <td>Algo & Struct. Données 1 (TD)<small>Salle 42</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algèbre 1 (CR)<small>Salle 1</small></td>
+                    </tr>
+                    <tr>
+                        <td>09:55 - 11:25</td>
+                        <td>Algo 1 (CR)<small>Salle MQ</small></td>
+                        <td>Atelier / Algo<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algo & Struct. Données 1 (TD)<small>Salle 42</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Analyse 1 (TD)<small>Salle 7</small></td>
+                    </tr>
+                    <tr>
+                        <td>11:35 - 13:05</td>
+                        <td>Analyse 1 (CR)<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td>Anglais 1 (CR)<small>Salle 1</small></td>
+                    </tr>
+                    <tr>
+                        <td>13:35 - 15:05</td>
+                        <td>Anglais 1 / TP<small>Salle CC2</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Logique Formelle (CR)<small>Salle 1</small></td>
+                        <td>Droits Humains (CR)<small>Salle 1</small></td>
+                        <td>Langue Française (CR)<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>15:10 - 16:40</td>
+                        <td class="empty-slot">—</td>
+                        <td>Sys. d'exploitation (CR)<small>Salle 1</small></td>
+                        <td>Sys. Logiques & Arch. (TD)<small>Salle 26</small></td>
+                        <td>Sys. Logiques & Arch. (CR)<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Tech. Émergentes (CR)<small>Salle 1</small></td>
+                    </tr>
+                    <tr>
+                        <td>16:45 - 18:15</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="schedule-card">
+        <h2>TABLEAU 6 : TD3 — TP2 + Cours et TD associés</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Horaires</th>
+                        <th>Lundi</th>
+                        <th>Mardi</th>
+                        <th>Mercredi</th>
+                        <th>Jeudi</th>
+                        <th>Vendredi</th>
+                        <th>Samedi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>08:15 - 09:45</td>
+                        <td>Algo 1 (CR)<small>Salle MQ</small></td>
+                        <td>Logique formelle (TD)<small>Salle 22</small></td>
+                        <td>Algèbre 1 (TD)<small>Salle 13</small></td>
+                        <td>Algo & Struct. Données 1 (TD)<small>Salle 42</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algèbre 1 (CR)<small>Salle 1</small></td>
+                    </tr>
+                    <tr>
+                        <td>09:55 - 11:25</td>
+                        <td>Algo 1 (CR)<small>Salle MQ</small></td>
+                        <td>Atelier / Algo<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Algo & Struct. Données 1 (TD)<small>Salle 42</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Analyse 1 (TD)<small>Salle 7</small></td>
+                    </tr>
+                    <tr>
+                        <td>11:35 - 13:05</td>
+                        <td>Analyse 1 (CR)<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td>Anglais 1 (CR)<small>Salle 1</small></td>
+                    </tr>
+                    <tr>
+                        <td>13:35 - 15:05</td>
+                        <td>Anglais 1 / TP<small>Salle CC2</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Logique Formelle (CR)<small>Salle 1</small></td>
+                        <td>Droits Humains (CR)<small>Salle 1</small></td>
+                        <td>Langue Française (CR)<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                    <tr>
+                        <td>15:10 - 16:40</td>
+                        <td class="empty-slot">—</td>
+                        <td>Sys. d'exploitation (CR)<small>Salle 1</small></td>
+                        <td>Sys. Logiques & Arch. (TD)<small>Salle 26</small></td>
+                        <td>Sys. Logiques & Arch. (CR)<small>Salle 1</small></td>
+                        <td class="empty-slot">—</td>
+                        <td>Tech. Émergentes (CR)<small>Salle 1</small></td>
+                    </tr>
+                    <tr>
+                        <td>16:45 - 18:15</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                        <td class="empty-slot">—</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
